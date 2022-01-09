@@ -1,3 +1,4 @@
+
 -- phpMyAdmin SQL Dump
 -- version 5.0.4deb2
 -- https://www.phpmyadmin.net/
@@ -17,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-DROP TABLE IF EXISTS entrie_history;
+DROP TABLE IF EXISTS entries_history;
 DROP TABLE IF EXISTS entries;
-DROP TABLE IF EXISTS item_history;
+DROP TABLE IF EXISTS items_history;
 DROP TABLE IF EXISTS items;
-DROP TABLE IF EXISTS category_history;
+DROP TABLE IF EXISTS categories_history;
 DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS location_history;
+DROP TABLE IF EXISTS locations_history;
 DROP TABLE IF EXISTS locations;
 
 
@@ -37,12 +38,13 @@ CREATE TABLE locations (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE location_history (
-  date timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'timestamp when the location with the given id was modified',
+CREATE TABLE locations_history (
+  internal_id int(11) UNIQUE NOT NULL AUTO_INCREMENT COMMENT 'internal use only',
+  date timestamp(3) UNIQUE NOT NULL DEFAULT current_timestamp() COMMENT 'timestamp when the location with the given id was modified',
   type tinyint(4) NOT NULL COMMENT '0: Added\r\n1: Modified\r\n2: Deleted',
-  location_id int(11) NOT NULL COMMENT 'ID of location which was modified',
-  name text DEFAULT NULL COMMENT 'null or new/modified name',
-  handled BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'true if this entry was included into locations' 
+  handled BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'true if this entry was included into locations',
+  id int(11) NOT NULL COMMENT 'ID of location which was modified',
+  name text DEFAULT NULL COMMENT 'null or new/modified name'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -56,12 +58,13 @@ CREATE TABLE categories (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE category_history (
-  date timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'timestamp when the category with the given id was modified',
+CREATE TABLE categories_history (
+  internal_id int(11) UNIQUE NOT NULL AUTO_INCREMENT COMMENT 'internal use only',
+  date timestamp(3) UNIQUE NOT NULL DEFAULT current_timestamp() COMMENT 'timestamp when the category with the given id was modified',
   type tinyint(4) NOT NULL COMMENT '0: Added\r\n1: Modified\r\n2: Deleted',
-  category_id int(11) NOT NULL COMMENT 'ID of category which was modified',
-  name text DEFAULT NULL COMMENT 'null or new/modified name',
-  handled BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'true if this entry was included into categories' 
+  handled BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'true if this entry was included into categories',
+  id int(11) NOT NULL COMMENT 'ID of category which was modified',
+  name text DEFAULT NULL COMMENT 'null or new/modified name'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -80,14 +83,15 @@ CREATE TABLE items (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE item_history (
-  date timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'timestamp when the item with the given id was modified',
+CREATE TABLE items_history (
+  internal_id int(11) UNIQUE NOT NULL AUTO_INCREMENT COMMENT 'internal use only',
+  date timestamp(3) UNIQUE NOT NULL DEFAULT current_timestamp() COMMENT 'timestamp when the item with the given id was modified',
   type tinyint(4) NOT NULL COMMENT '0: Added\r\n1: Modified\r\n2: Deleted',
-  item_id int(11) NOT NULL COMMENT 'ID of item which was modified',
+  handled BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'true if this entry was included into items',
+  id int(11) NOT NULL COMMENT 'ID of item which was modified',
   name text DEFAULT NULL COMMENT 'null or new/modified name',
   image_size int(11) DEFAULT NULL COMMENT 'null or new/modified image size',
-  image longblob DEFAULT NULL COMMENT 'null or new/modified image',
-  handled BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'true if this entry was included into items' 
+  image longblob DEFAULT NULL COMMENT 'null or new/modified image'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -107,14 +111,15 @@ CREATE TABLE entries (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE entry_history (
-  date timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'timestamp when the item with the given id was modified',
-  type tinyint(4) NOT NULL COMMENT '0: Added\r\n1: Deleted\r\n2: Set Value\r\n3: Increase number of items\r\n4: Decrease number of items',
-  entry_id int(11) NOT NULL COMMENT 'ID of entry which was modified',
+CREATE TABLE entries_history (
+  internal_id int(11) UNIQUE NOT NULL AUTO_INCREMENT COMMENT 'internal use only',
+  date timestamp(3) UNIQUE NOT NULL DEFAULT current_timestamp() COMMENT 'timestamp when the item with the given id was modified',
+  type tinyint(4) NOT NULL COMMENT '0: Added\r\n2: Deleted\r\n3: Set Value\r\n4: Increase number of items\r\n5: Decrease number of items',
+  handled BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'true if this entry was included into entries',
+  id int(11) NOT NULL COMMENT 'ID of entry which was modified',
   item_id int(11) DEFAULT NULL COMMENT 'null or new/modified item_id',
   location_id int(11) DEFAULT NULL COMMENT 'null or new/modified location_id',
-  number_of_items int(11) DEFAULT NULL COMMENT 'null or new/modified number_of_items',
-  handled BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'true if this entry was included into entries' 
+  number_of_items int(11) DEFAULT NULL COMMENT 'null or new/modified number_of_items'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 

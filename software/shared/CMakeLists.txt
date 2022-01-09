@@ -35,6 +35,11 @@ set(SOURCE
   ${CMAKE_CURRENT_SOURCE_DIR}/MySqlException.cpp
 )
 
+add_subdirectory(sql_parameters)
+add_subdirectory(history_items)
+add_subdirectory(items)
+
+
 ##############################################################################
 # Define libraries
 ##############################################################################
@@ -52,3 +57,4 @@ SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE})
 ##############################################################################
 add_library(CoreDatabaseConnector STATIC ${SOURCE})
 target_link_libraries(CoreDatabaseConnector ${LIB})
+

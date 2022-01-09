@@ -36,7 +36,7 @@ public:
    * 
    * @param message reason for the exception
    */
-  explicit MySqlException(const std::string& message);
+  explicit MySqlException(const std::string& message = "");
 
 public:
   /**
@@ -75,6 +75,57 @@ public:
    * Destructor
    */
   virtual ~MySqlException();
+
+private:
+  template<typename T>
+  using isCharPointer = std::is_same<typename std::remove_const<typename std::remove_pointer<T>::type>::type, char>;
+
+private:
+  template<typename T>
+  using isCharArray = std::is_same<typename std::remove_extent<typename std::remove_pointer<T>::type>::type, char>;
+
+private:
+  /**
+   * @brief helper template testing if T is a std::string, char* or const char*
+   */
+  template<typename T>
+  using testIfString = std::enable_if<std::is_same<T, std::string>::value || isCharPointer<T>::value || isCharArray<T>::value,
+                                      int>;
+private:
+  /**
+   * @brief helper template testing if T is a arithmetic type
+   */
+  template<typename T>
+  using testIfArithmetic = std::enable_if<std::is_arithmetic<T>::value, int>;
+
+private:
+  /**
+   * @brief helper template testing if T is none of the above
+   */
+  template<typename T>
+  using testIfStrFunction = std::enable_if<!std::is_arithmetic<T>::value && !std::is_same<T, std::string>::value &&
+                                             !isCharPointer<T>::value && !isCharArray<T>::value,
+                                           int>;
+
+public:
+  /**
+   * @brief operator to append a string to the message
+   */
+  template<typename T, typename testIfString<T>::type = 0>
+  inline MySqlException& operator<<(const T& add) {
+    message += add;
+    return *this;
+  }
+
+public:
+  /**
+   * @brief operator to append a arithmetic type to the message
+   */
+  template<typename T, typename testIfArithmetic<T>::type = 0>
+  inline MySqlException& operator<<(const T& add) {
+    message += std::to_string(add);
+    return *this;
+  }
 
 public:
   /**

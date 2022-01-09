@@ -6,21 +6,50 @@
 
 #include <mysql.h>
 #include <string>
+#include <list>
 
 namespace com {
 namespace sebastianwinter {
 namespace fridge_management {
 namespace core_data_base_connector {
+namespace history_items {
+class Category;
+class Location;
+class Item;
+class Entry;
+} // namespace history_items
+namespace items {
+class Category;
+class Location;
+class Item;
+class Entry;
+} // namespace items
 
 /**
  * @brief Class handling the database for the fridge management
  */
 class CoreDatabaseConnector {
+#pragma region static stuff
+#pragma endregion
+
+#pragma region Members
 protected:
   /**
    * @brief connection object to the SQL server
    */
   MYSQL* sqlConnection;
+
+protected:
+  /**
+   * @brief List with all categories
+   */
+  std::list<items::Category*> categories;
+#pragma endregion
+
+#pragma region Events
+#pragma endregion
+
+#pragma region Object Construction / Destruction
 
 public:
   /**
@@ -43,6 +72,29 @@ public:
    * @brief closes the database connection
    */
   virtual ~CoreDatabaseConnector();
+#pragma endregion
+
+#pragma region Getter / Setter
+  /**
+   * @brief Returns the SQL connection
+   */
+  MYSQL*& getSqlConnection();
+#pragma endregion
+
+#pragma region SQL Interface
+#pragma endregion
+  /**
+   * @brief 
+   * 
+   * @param
+   */
+  void newCategoryHistoryItem(history_items::Category* catergory, const bool& forwardItem);
+
+protected:
+  /**
+   * @brief Execute all actions in the *_history tables which are not handled
+   */
+  void handleScheduledActions();
 };
 } // namespace core_data_base_connector
 } // namespace fridge_management

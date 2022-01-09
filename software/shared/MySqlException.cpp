@@ -14,7 +14,7 @@ MySqlException::MySqlException(const std::string& message)
   : message(message) {}
 
 MySqlException::MySqlException(MYSQL* sqlConnection)
-  : message(message) {}
+  : message(mysql_error(sqlConnection)) {}
 
 MySqlException::MySqlException(const MySqlException& other)
   : message(other.message) {}
