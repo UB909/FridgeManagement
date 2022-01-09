@@ -1,0 +1,41 @@
+﻿<local:UserControlWithTitle x:Class="FridgeManagement.Views.ItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FridgeManagement.Views"
+             xmlns:uc="clr-namespace:FridgeManagement.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" PanningMode="VerticalOnly">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="200"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" x:Name="wndPanel">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <uc:AddSubToLocationOfItem Grid.Row="0" Grid.Column="0"/>
+            </Grid>
+
+            <uc:Item Grid.Row="1" Grid.Column="0" Margin="5" x:Name="wndImage" Click="wndImage_Click"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=item.name}" Margin="5" VerticalAlignment="Center"/>
+            <ComboBox Name="wndLocationSelection" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=categories}" SelectedValue="{Binding Path=item.category}" DisplayMemberPath="name" Margin="5" VerticalAlignment="Center"/>
+        </Grid>
+    </ScrollViewer>
+</local:UserControlWithTitle>

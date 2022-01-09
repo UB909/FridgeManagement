@@ -1,0 +1,84 @@
+﻿<Window x:Class="FridgeManagement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FridgeManagement"
+        xmlns:uc="clr-namespace:FridgeManagement.Controls"
+        xmlns:view="clr-namespace:FridgeManagement.Views"
+        mc:Ignorable="d"
+        Title="MainWindow --  ~115%!" Height="720" Width="1280" FontSize="24"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <!--WindowStyle="None"-->
+    <Grid Name="wndMainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="54"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="24"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="54"/>
+            </Grid.ColumnDefinitions>
+            <uc:CategorySelector Grid.Column="0" x:Name="wndCategories" CategorySelected="wndCategories_CategorySelected"/>
+            <ComboBox Name="wndLocationSelection" Grid.Column="2" DisplayMemberPath="name"  Margin="5" SelectionChanged="LocationSelectionChanged"/>
+            <Button Name="btnAdd" Grid.Column="4" Content="..." Margin="5" Click="btnAdd_Click">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Add Item" FontSize="40" Click="addItem_Clicked"/>
+                        <MenuItem Header="Add Category" FontSize="40" Click="addCategory_Clicked"/>
+                        <MenuItem Header="Add Location" FontSize="40" Click="addLocation_Clicked"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+        </Grid>
+
+        <Label Name="wndTitle" Grid.Row="1" Background="#FF0049AB" Foreground="White"  Margin="5" Padding="20, 3, 3, 3" Content="{Binding Path=currentView.Title}" VerticalAlignment="Center"/>
+
+        <view:CategoryView x:Name="categoryView" Grid.Row="2" Margin="5" Visibility="Collapsed" ItemSelect="CategoryView_ItemSelect" FontSize="24"/>
+        <view:ItemView x:Name="itemView" Grid.Row="2" Margin="5" Visibility="Collapsed" FontSize="24"/>
+        <view:LocationView x:Name="locationView" Grid.Row="2" Margin="5" Visibility="Collapsed" FontSize="24"/>
+
+
+
+
+
+
+        <!--Button Grid.Row="3" Content="ASfdasdf" Click="Button_Click"/-->
+        <StatusBar Grid.Row ="4">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+
+            <StatusBarItem Grid.Column="0">
+                <TextBlock Name="lblInfoMsg" Text="Info Msg" />
+            </StatusBarItem>
+            <Separator Grid.Column="1" />
+            <StatusBarItem Grid.Column="2">
+                <TextBlock Text="Sql Connection: "/>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="3">
+                <uc:TrafficLight x:Name="wndSqlConnectionState"/>
+            </StatusBarItem>
+        </StatusBar>
+
+
+
+    </Grid>
+</Window>
