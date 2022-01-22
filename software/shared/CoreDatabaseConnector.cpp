@@ -80,6 +80,16 @@ MYSQL*& CoreDatabaseConnector::getSqlConnection() {
 
 #pragma region SQL Interface
 #pragma endregion
+void CoreDatabaseConnector::newCategoryHistoryItem(history_items::Category* category, const bool& forwardItem) {
+  category->insertToDatabase();
+  category->handle(categories);
+  if (forwardItem) {
+    //TODO....
+  }
+  delete category;
+}
+
+
 void CoreDatabaseConnector::handleScheduledActions() {
   //if (mysql_query(con, "CREATE DATABASE testdb")) {
   //  fprintf(stderr, "%s\n", mysql_error(con));

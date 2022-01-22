@@ -97,7 +97,7 @@ protected:
   NamedDatabaseItemBase& operator=(NamedDatabaseItemBase&& other) noexcept = delete;
 #pragma endregion
 
-#pragma region Getter / Setter
+#pragma region Setter
 #pragma region Name
 public:
   /**
@@ -105,14 +105,6 @@ public:
    */
   const std::string& getName() const {
     return getParameter<sql_parameters::StringParameter>("name")->get();
-  }
-
-public:
-  /**
-   * @brief Sets the name of the item and updates the value in the database
-   */
-  void setName(const std::string& newValue) {
-    getParameter<sql_parameters::StringParameter>("name")->set(newValue);
   }
 #pragma endregion
 #pragma endregion

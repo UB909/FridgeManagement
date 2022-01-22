@@ -39,13 +39,20 @@ Category::Category(CoreDatabaseConnector& core, MYSQL_ROW& row)
 #pragma endregion
 
 void Category::onParameterValueChanged(const sql_parameters::ParameterBase& param) {
-  history_items::Category h(core, getId(), param);
+  core.newCategoryHistoryItem(new history_items::Category(core, getId(), param), true);
 }
 
 int Category::insertToDatabase() {
   NamedDatabaseItemBase::insertToDatabase(getTableName());
   return getId();
 }
+
+void Category::modifyParameter(const sql_parameters::ParameterBase& param) 
+{
+  getParameter<sql_parameters::ParameterBase>(param.name)->setAsSqlString(param.getAsSqlString().c_str());
+  update databse fehlt noch 
+}
+
 
 } // namespace items
 } // namespace core_data_base_connector

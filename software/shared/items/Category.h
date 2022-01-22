@@ -100,6 +100,12 @@ public:
    * @returns the id of this object in the database
    */
   int insertToDatabase();
+
+public:
+  /**
+   * @brief Callback for a history entry to apply a parameter update
+   */
+  void modifyParameter(const sql_parameters::ParameterBase& param);
 };
 } // namespace items
 } // namespace core_data_base_connector

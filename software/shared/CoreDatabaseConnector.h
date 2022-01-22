@@ -4,9 +4,9 @@
  */
 #pragma once
 
+#include <list>
 #include <mysql.h>
 #include <string>
-#include <list>
 
 namespace com {
 namespace sebastianwinter {
@@ -79,16 +79,20 @@ public:
    * @brief Returns the SQL connection
    */
   MYSQL*& getSqlConnection();
+
 #pragma endregion
 
 #pragma region SQL Interface
 #pragma endregion
   /**
-   * @brief 
-   * 
-   * @param
+   * @brief function which should be called if a category was changed, added,
+   * etc.
+   *
+   * @param category the history item which describes what should be done
+   * @param forwardItem if false, the item was received by another client and
+   * therefore must not be sent to other clients
    */
-  void newCategoryHistoryItem(history_items::Category* catergory, const bool& forwardItem);
+  void newCategoryHistoryItem(history_items::Category* category, const bool& forwardItem);
 
 protected:
   /**

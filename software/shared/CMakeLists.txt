@@ -55,6 +55,19 @@ SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE})
 ##############################################################################
 # Link
 ##############################################################################
-add_library(CoreDatabaseConnector STATIC ${SOURCE})
+#add_library(CoreDatabaseConnector STATIC ${SOURCE})
+#target_link_libraries(CoreDatabaseConnector ${LIB})
+
+
+# TESTING!!!!!!!!!!!!
+set(SOURCE
+  ${SOURCE}
+  ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp)
+add_executable (CoreDatabaseConnector ${SOURCE} )
+
+##############################################################################
+# Link
+##############################################################################
 target_link_libraries(CoreDatabaseConnector ${LIB})
+
 

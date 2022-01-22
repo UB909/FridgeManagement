@@ -27,9 +27,7 @@ const std::string Category::getTableName() {
 
 #pragma region Object Construction / Destruction
 
-Category::Category(CoreDatabaseConnector& core,
-                                 const int& id,
-                                 const sql_parameters::ParameterBase& updatedParameter)
+Category::Category(CoreDatabaseConnector& core, const int& id, const sql_parameters::ParameterBase& updatedParameter)
   : NamedDatabaseItemBase(core, id, updatedParameter) {}
 
 Category::Category(CoreDatabaseConnector& core, MYSQL_ROW& row)
@@ -49,11 +47,24 @@ void Category::handle(std::list<items::Category*>& lstCategories) {
     // mark as handled
     setHandled(getTableName());
   }
-  else if (type == Type::removed) {
-    throw std::runtime_error("Not implemented  Category::handle");
-  }
-  else if (type == Type::modified) {
-    throw std::runtime_error("Not implemented  Category::handle");
+  else {
+    items::Category* modifiedCategory = nullptr;
+    for (auto cat : lstCategories) {
+      if (cat->getId() == id) {
+        modifiedCategory = cat;
+        break;
+      }
+    }
+    if (!modifiedCategory) {
+      throw std::runtime_error("Category not found for id = " + std::to_string(id));
+    }
+
+    if (type == Type::removed) {
+      throw std::runtime_error("Not implemented  Category::handle");
+    }
+    else if (type == Type::modified) {
+      modifiedCategory->modifyParameter(*updatedParameter);
+    }
   }
 }
 } // namespace history_items
