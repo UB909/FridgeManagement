@@ -1,0 +1,12 @@
+var classcom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector_1_1history__items_1_1_named_database_item_base =
+[
+    [ "NamedDatabaseItemBase", "classcom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector_1_1history__items_1_1_named_database_item_base.html#a9b1686108dbc0dad346f4403467790f6", null ],
+    [ "NamedDatabaseItemBase", "classcom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector_1_1history__items_1_1_named_database_item_base.html#a62c30105197e1cc9b18e580e44078f96", null ],
+    [ "NamedDatabaseItemBase", "classcom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector_1_1history__items_1_1_named_database_item_base.html#a4452cd2dcd3b2a0ff9e0b9bcfd5ce462", null ],
+    [ "NamedDatabaseItemBase", "classcom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector_1_1history__items_1_1_named_database_item_base.html#a9f06d48607c3d2675005381ad70fe8ee", null ],
+    [ "getSelectFieldNames", "classcom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector_1_1history__items_1_1_named_database_item_base.html#a30894ac729cc1da8cf933ced226fa7eb", null ],
+    [ "operator=", "classcom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector_1_1history__items_1_1_named_database_item_base.html#aa97eb10e269a05cbff24ba63848e7672", null ],
+    [ "operator=", "classcom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector_1_1history__items_1_1_named_database_item_base.html#a64c76eb93dd6cabbc6e3922d626c7e32", null ],
+    [ "DatabaseItemBase", "classcom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector_1_1history__items_1_1_named_database_item_base.html#ab00f659c060c90cd5fd43cde0360d6a3", null ],
+    [ "name", "classcom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector_1_1history__items_1_1_named_database_item_base.html#a39700bb8561a78b19f1e13899f181465", null ]
+];

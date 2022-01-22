@@ -1,0 +1,4 @@
+var namespacecom_1_1sebastianwinter_1_1fridge__management =
+[
+    [ "core_data_base_connector", "namespacecom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector.html", "namespacecom_1_1sebastianwinter_1_1fridge__management_1_1core__data__base__connector" ]
+];
